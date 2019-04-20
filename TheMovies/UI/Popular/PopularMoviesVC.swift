@@ -14,6 +14,8 @@ class PopularMoviesVC: UIViewController {
     private let spacing: CGFloat = 16
     private let numberOfColumns: CGFloat = 2
     private var flowLayout: UICollectionViewFlowLayout!
+    
+    var presenter: PopularMoviesPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,5 +58,9 @@ extension PopularMoviesVC: UICollectionViewDelegate, UICollectionViewDataSource 
         cell.labelName.text = "Avenger Endgame"
         return cell
     }
+    
+}
+
+extension PopularMoviesVC: PopularMoviesVCProtocol {
     
 }
