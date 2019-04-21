@@ -34,9 +34,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2f-h5-Ywb">
+                                <rect key="frame" x="194" y="10" width="40" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Fzt-85-gdb"/>
+                                    <constraint firstAttribute="width" secondItem="c2f-h5-Ywb" secondAttribute="height" multiplier="1:1" constant="1" id="JiE-h2-4U4"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <state key="normal" image="ic_fav_normal"/>
+                                <state key="selected" image="ic_fav"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="c2f-h5-Ywb" firstAttribute="top" secondItem="cRe-SE-n0e" secondAttribute="top" constant="10" id="1EG-Ej-6tL"/>
                             <constraint firstAttribute="bottom" secondItem="jMv-1a-u8n" secondAttribute="bottom" id="5aN-QR-Odg"/>
                             <constraint firstItem="uXh-nF-2Cp" firstAttribute="leading" secondItem="cRe-SE-n0e" secondAttribute="leading" id="6a1-Zw-sJj"/>
                             <constraint firstAttribute="bottom" secondItem="uXh-nF-2Cp" secondAttribute="bottom" id="HYd-nJ-mIb"/>
@@ -46,6 +57,7 @@
                             <constraint firstItem="jMv-1a-u8n" firstAttribute="top" secondItem="cRe-SE-n0e" secondAttribute="top" id="hII-3p-JdG"/>
                             <constraint firstAttribute="bottom" secondItem="ALC-qH-mNd" secondAttribute="bottom" constant="15" id="lTk-RU-VNW"/>
                             <constraint firstAttribute="trailing" secondItem="uXh-nF-2Cp" secondAttribute="trailing" id="o2I-4v-pUi"/>
+                            <constraint firstAttribute="trailing" secondItem="c2f-h5-Ywb" secondAttribute="trailing" constant="10" id="p95-lB-Pze"/>
                             <constraint firstItem="jMv-1a-u8n" firstAttribute="leading" secondItem="cRe-SE-n0e" secondAttribute="leading" id="vvq-z5-y2Y"/>
                             <constraint firstItem="ALC-qH-mNd" firstAttribute="leading" secondItem="cRe-SE-n0e" secondAttribute="leading" constant="15" id="ySc-jl-XS1"/>
                         </constraints>
@@ -60,6 +72,7 @@
             </constraints>
             <size key="customSize" width="244" height="320"/>
             <connections>
+                <outlet property="btnFav" destination="c2f-h5-Ywb" id="3n2-19-KAV"/>
                 <outlet property="ivMovie" destination="jMv-1a-u8n" id="5no-e6-H7a"/>
                 <outlet property="labelName" destination="ALC-qH-mNd" id="qAZ-bG-1yx"/>
                 <outlet property="layerView" destination="uXh-nF-2Cp" id="6WN-Vk-zHb"/>
@@ -68,6 +81,8 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="ic_fav" width="72" height="72"/>
+        <image name="ic_fav_normal" width="72" height="72"/>
         <image name="movie_avenger_endgame" width="714" height="1119"/>
     </resources>
 </document>

@@ -13,6 +13,7 @@ class MovieCVCell: UICollectionViewCell {
     @IBOutlet weak var ivMovie: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var layerView: UIView!
+    @IBOutlet weak var btnFav: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +28,8 @@ class MovieCVCell: UICollectionViewCell {
         self.contentView.backgroundColor = UIColor.lightText
         
         layerView.backgroundColor = UIColor.purple.withAlphaComponent(0.12)
+        
+        btnFav.addTarget(self, action: #selector(btnFavTapped), for: .touchUpInside)
     }
     
     override func prepareForReuse() {
@@ -37,6 +40,10 @@ class MovieCVCell: UICollectionViewCell {
     public func configure(movie: Movie) {
         labelName.text = movie.title
         ivMovie.load(url: movie.fullPosterPath)
+    }
+    
+    @objc private func btnFavTapped() {
+        btnFav.isSelected = !btnFav.isSelected
     }
 
 }

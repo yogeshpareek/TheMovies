@@ -24,6 +24,11 @@ class MovieDetailVC: BaseUIViewController {
     @IBOutlet weak var _labelCastTitle: UILabel!
     @IBOutlet weak var btnCastViewAll: UIButton!
     @IBOutlet weak var cvCast: UICollectionView!
+
+    @IBOutlet weak var btnWatchList: UIButton!
+    @IBOutlet weak var btnShare: UIButton!
+    @IBOutlet weak var btnFav: UIButton!
+
     
     var presenter: MovieDetailPresenterProtocol?
     var movieViewModel: MovieDetailViewModel?
@@ -67,6 +72,24 @@ class MovieDetailVC: BaseUIViewController {
 
         btnCastViewAll.addTarget(self, action: #selector(btnCastViewAllTapped), for: .touchUpInside)
         btnOverviewMore.addTarget(self, action: #selector(btnOverviewMoreTapped), for: .touchUpInside)
+        
+        for btn in [btnFav, btnShare, btnWatchList] {
+            btn?.addTarget(self, action: #selector(btnActionsTapped(sender:)), for: .touchUpInside)
+        }
+    }
+    
+    @objc private func btnActionsTapped(sender: UIButton) {
+        switch sender {
+        case btnWatchList:
+            break
+        case btnShare:
+            break
+        case btnFav:
+            btnFav.isSelected = !btnFav.isSelected
+            break
+        default:
+            break
+        }
     }
     
     override func setUITheme() {

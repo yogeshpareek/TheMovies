@@ -93,8 +93,26 @@
                                                     <constraint firstItem="5Tl-oC-ree" firstAttribute="top" secondItem="GmB-ml-bQ5" secondAttribute="bottom" constant="8" id="ycp-4G-bQ6"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7k-Ae-uvd">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I7k-Ae-uvd">
                                                 <rect key="frame" x="0.0" y="209.5" width="375" height="75"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyM-7l-S1k">
+                                                        <rect key="frame" x="0.0" y="0.0" width="118.5" height="75"/>
+                                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                                        <state key="normal" image="ic_watchlist"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWh-xF-R6E">
+                                                        <rect key="frame" x="128.5" y="0.0" width="118" height="75"/>
+                                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                                        <state key="normal" image="ic_fav_normal"/>
+                                                        <state key="selected" image="ic_fav"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3BR-dF-0jv">
+                                                        <rect key="frame" x="256.5" y="0.0" width="118.5" height="75"/>
+                                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                                        <state key="normal" image="ic_share"/>
+                                                    </button>
+                                                </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="I7k-Ae-uvd" secondAttribute="height" multiplier="5:1" id="8Rt-rf-RMd"/>
                                                 </constraints>
@@ -194,9 +212,12 @@
                         <outlet property="_labelCastTitle" destination="Qta-vU-GnC" id="77B-Hp-v8R"/>
                         <outlet property="_labelOverviewTitle" destination="YPf-yu-Dj6" id="iQV-RV-Nao"/>
                         <outlet property="btnCastViewAll" destination="VdH-CQ-cx1" id="S0q-4C-6Dc"/>
+                        <outlet property="btnFav" destination="nWh-xF-R6E" id="gxy-tF-zEA"/>
                         <outlet property="btnOverviewMore" destination="pyh-Vu-exO" id="XPr-tu-4IG"/>
                         <outlet property="btnRating" destination="x95-1f-4GH" id="GSQ-fD-Zhb"/>
+                        <outlet property="btnShare" destination="3BR-dF-0jv" id="lqd-E7-8NL"/>
                         <outlet property="btnTime" destination="aur-gJ-obB" id="ozy-an-jH2"/>
+                        <outlet property="btnWatchList" destination="AyM-7l-S1k" id="qKa-gP-N4L"/>
                         <outlet property="cvCast" destination="kVz-KG-Pcg" id="0PS-U3-wQc"/>
                         <outlet property="ivMovie" destination="kbX-Uy-Jg4" id="6eg-Sv-zvC"/>
                         <outlet property="labelGenre" destination="5Tl-oC-ree" id="i4J-Uq-exg"/>
@@ -214,6 +235,10 @@
     </scenes>
     <resources>
         <image name="ic_clock" width="32" height="32"/>
+        <image name="ic_fav" width="72" height="72"/>
+        <image name="ic_fav_normal" width="72" height="72"/>
         <image name="ic_rating" width="32" height="32"/>
+        <image name="ic_share" width="72" height="72"/>
+        <image name="ic_watchlist" width="72" height="72"/>
     </resources>
 </document>
