@@ -28,7 +28,6 @@ class MovieDetailVC: BaseUIViewController {
     @IBOutlet weak var btnWatchList: UIButton!
     @IBOutlet weak var btnShare: UIButton!
     @IBOutlet weak var btnFav: UIButton!
-
     
     var presenter: MovieDetailPresenterProtocol?
     var movieViewModel: MovieDetailViewModel?
@@ -160,7 +159,7 @@ extension MovieDetailVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCastCVCell", for: indexPath) as! MovieCastCVCell
-        cell.configure(cast: movieViewModel?.cast(at: indexPath))
+        cell.configure(cast: movieViewModel?.cast(at: indexPath), indexPath: indexPath)
         return cell
     }
     

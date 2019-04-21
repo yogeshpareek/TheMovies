@@ -74,7 +74,7 @@ extension PopularMoviesVC: UICollectionViewDelegate, UICollectionViewDataSource,
             return cell
         }
         let movie = viewModel.movie(at: indexPath)
-        cell.configure(movie: movie)
+        cell.configure(movie: movie, indexPath: indexPath)
         return cell
     }
     

@@ -10,13 +10,29 @@ import UIKit
 
 extension UIImageView {
     
-    func load(url: String) {
-        ImageRequest().download(url: url) { (downloadUrl, image) in
-            if let _image = image, downloadUrl == url {
-                self.image = self.resizedImageWith(image: _image, targetSize: self.frame.size)
+    func load(url: String, indexPath: IndexPath) {
+        ImageDownloadManager.shared.download(url: url, indexPath: indexPath, size: self.frame.size) { (image, url, indexPathh, error) in
+            if let _image = image, let _indexPath = indexPathh, _indexPath == indexPath {
+                self.image = _image
             }
         }
     }
+    
+    func load(url: String) {
+        ImageDownloadManager.shared.download(url: url, indexPath: nil, size: self.frame.size) { (image, url, indexPathh, error) in
+            if let _image = image {
+                self.image = _image
+            }
+        }
+    }
+    
+    func resizedImageWith(image: UIImage, targetSize: CGSize) -> UIImage? {
+        return image.resizedImageWith(image: image, targetSize: targetSize)
+    }
+    
+}
+
+extension UIImage {
     
     func resizedImageWith(image: UIImage, targetSize: CGSize) -> UIImage? {
         let imageSize = image.size

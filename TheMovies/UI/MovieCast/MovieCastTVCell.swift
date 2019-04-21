@@ -43,19 +43,19 @@ class MovieCastTVCell: UITableViewCell {
         ivCastImage.image = nil
     }
     
-    func configure(cast: MovieCast?) {
+    func configure(cast: MovieCast?, indexPath: IndexPath) {
         if let _cast = cast {
             labelName.text = _cast.name
             labelCharacter.text = _cast.character
-            ivCastImage.load(url: _cast.fullProfilePath)
+            ivCastImage.load(url: _cast.fullProfilePath, indexPath: indexPath)
         }
     }
     
-    func configure(crew: MovieCrew?) {
+    func configure(crew: MovieCrew?, indexPath: IndexPath) {
         if let _crew = crew {
             labelName.text = _crew.name
             labelCharacter.text = "\(_crew.job) - \(_crew.department)"
-            ivCastImage.load(url: _crew.fullProfilePath)
+            ivCastImage.load(url: _crew.fullProfilePath, indexPath: indexPath)
         }
     }
     

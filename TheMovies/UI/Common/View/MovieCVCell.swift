@@ -37,9 +37,9 @@ class MovieCVCell: UICollectionViewCell {
         ivMovie.image = nil
     }
     
-    public func configure(movie: Movie) {
+    public func configure(movie: Movie, indexPath: IndexPath) {
         labelName.text = movie.title
-        ivMovie.load(url: movie.fullPosterPath)
+        ivMovie.load(url: movie.fullPosterPath, indexPath: indexPath)
     }
     
     @objc private func btnFavTapped() {

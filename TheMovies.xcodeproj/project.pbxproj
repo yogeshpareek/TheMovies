@@ -74,6 +74,8 @@
 		2FDE98E2226C7C550066471D /* MovieCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE98E1226C7C550066471D /* MovieCrew.swift */; };
 		2FDE98E4226C87160066471D /* MovieCastTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE98E3226C87160066471D /* MovieCastTVCell.swift */; };
 		2FDE98E6226C87230066471D /* UIMovieCastTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDE98E5226C87230066471D /* UIMovieCastTVCell.xib */; };
+		2FDE98EA226CCCE00066471D /* ImageDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE98E9226CCCE00066471D /* ImageDownloadManager.swift */; };
+		2FDE98ED226CCEC20066471D /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE98EC226CCEC20066471D /* ImageDownloadOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +169,8 @@
 		2FDE98E1226C7C550066471D /* MovieCrew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCrew.swift; sourceTree = "<group>"; };
 		2FDE98E3226C87160066471D /* MovieCastTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCastTVCell.swift; sourceTree = "<group>"; };
 		2FDE98E5226C87230066471D /* UIMovieCastTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIMovieCastTVCell.xib; sourceTree = "<group>"; };
+		2FDE98E9226CCCE00066471D /* ImageDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadManager.swift; sourceTree = "<group>"; };
+		2FDE98EC226CCEC20066471D /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +221,7 @@
 		2F8D0943226B51A2000925AF /* TheMovies */ = {
 			isa = PBXGroup;
 			children = (
+				2FDE98E7226CCCC20066471D /* Manager */,
 				2FDE9890226B68730066471D /* Utils */,
 				2F8D0944226B51A2000925AF /* AppDelegate.swift */,
 				2FDE987B226B61800066471D /* AppNavigationCordinator.swift */,
@@ -465,6 +470,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		2FDE98E7226CCCC20066471D /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				2FDE98E8226CCCCE0066471D /* ImageLoader */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		2FDE98E8226CCCCE0066471D /* ImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				2FDE98E9226CCCE00066471D /* ImageDownloadManager.swift */,
+				2FDE98EC226CCEC20066471D /* ImageDownloadOperation.swift */,
+			);
+			path = ImageLoader;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -615,6 +637,7 @@
 				2FDE98BB226C52E50066471D /* Image.swift in Sources */,
 				2FDE9894226B7FE40066471D /* UIViewController+Ext.swift in Sources */,
 				2FDE98D3226C6E910066471D /* MovieDetailRequest.swift in Sources */,
+				2FDE98EA226CCCE00066471D /* ImageDownloadManager.swift in Sources */,
 				2FDE986F226B5DEF0066471D /* UINavigationBar+Ext.swift in Sources */,
 				2FDE9881226B64250066471D /* PopularMoviesRequest.swift in Sources */,
 				2FDE9898226B842F0066471D /* HTTPClient.swift in Sources */,
@@ -641,6 +664,7 @@
 				2FDE9878226B61380066471D /* PopularMoviesWireFrame.swift in Sources */,
 				2FDE98E2226C7C550066471D /* MovieCrew.swift in Sources */,
 				2FDE98E4226C87160066471D /* MovieCastTVCell.swift in Sources */,
+				2FDE98ED226CCEC20066471D /* ImageDownloadOperation.swift in Sources */,
 				2FDE98CA226C6DE00066471D /* MovieDetailInteractor.swift in Sources */,
 				2FDE98E0226C7C440066471D /* MovieCast.swift in Sources */,
 				2FDE989E226B87690066471D /* MovieRoute.swift in Sources */,

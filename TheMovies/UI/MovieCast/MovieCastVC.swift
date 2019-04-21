@@ -88,9 +88,9 @@ extension MovieCastVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCastTVCell", for: indexPath) as! MovieCastTVCell
         if indexPath.section == 0 {
-            cell.configure(cast: movieViewModel.cast(at: indexPath))
+            cell.configure(cast: movieViewModel.cast(at: indexPath), indexPath: indexPath)
         } else {
-           cell.configure(crew: movieViewModel.crew(at: indexPath))
+            cell.configure(crew: movieViewModel.crew(at: indexPath), indexPath: indexPath)
         }
         return cell
     }

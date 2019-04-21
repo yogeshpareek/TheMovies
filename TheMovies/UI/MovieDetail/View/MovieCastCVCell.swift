@@ -42,10 +42,10 @@ class MovieCastCVCell: UICollectionViewCell {
         ivCastImage.image = nil
     }
     
-    func configure(cast: MovieCast?) {
+    func configure(cast: MovieCast?, indexPath: IndexPath) {
         if let _cast = cast {
             labelName.text = _cast.name
-            ivCastImage.load(url: _cast.fullProfilePath)
+            ivCastImage.load(url: _cast.fullProfilePath, indexPath: indexPath)
         }
         roundImage()
     }
