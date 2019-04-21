@@ -23,12 +23,20 @@ class MovieCVCell: UICollectionViewCell {
         labelName.numberOfLines = 2
         labelName.font = UIFont.themeBoldFont(of: 18)
         labelName.textColor = UIColor.white
+        ivMovie.image = nil
+        self.contentView.backgroundColor = UIColor.lightText
         
         layerView.backgroundColor = UIColor.purple.withAlphaComponent(0.12)
     }
     
+    override func prepareForReuse() {
+        labelName.text = nil
+        ivMovie.image = nil
+    }
+    
     public func configure(movie: Movie) {
         labelName.text = movie.title
+        ivMovie.load(url: movie.fullPosterPath)
     }
 
 }

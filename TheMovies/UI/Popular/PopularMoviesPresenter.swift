@@ -46,7 +46,16 @@ extension PopularMoviesPresenter: PopularMoviesOutputInteractorProtocol {
     func onPopularMoviesSuccess(response: PopularMoviesResponse) {
         view?.hideLoading()
         moviesViewModel.success(objects: response.results)
-        view?.showPopularMovies(viewModel: moviesViewModel)
+        if moviesViewModel.moviesCount <= moviesViewModel.pageSize {
+            view?.showPopularMovies(viewModel: moviesViewModel)
+        } else {
+            let previousCount = moviesViewModel.moviesCount - response.results.count
+            let totalCount = moviesViewModel.moviesCount
+            let indexPaths: [IndexPath] = (previousCount..<totalCount).map {
+                return IndexPath(item: $0, section: 0)
+            }
+            view?.insertPopularMovies(at: indexPaths)
+        }
     }
     
     func onPopularMoviesError(error: APIError) {

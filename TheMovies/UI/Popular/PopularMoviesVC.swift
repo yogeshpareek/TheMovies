@@ -107,14 +107,14 @@ extension PopularMoviesVC: PopularMoviesVCProtocol {
             showLoadingView(msg: message)
         } else {
             showCVLoadingFooter = false
-            moviesCV.reloadData()
+            moviesCV.reloadSections(IndexSet(integer: 0))
         }
     }
     
     func hideLoading() {
         if showCVLoadingFooter {
             showCVLoadingFooter = false
-            moviesCV.reloadData()
+            moviesCV.reloadSections(IndexSet(integer: 0))
         } else {
             hideLoadingView()
         }
@@ -122,7 +122,7 @@ extension PopularMoviesVC: PopularMoviesVCProtocol {
    
     func showPopularMovies(viewModel: MovieViewModel) {
         self.movieViewModel = viewModel
-        moviesCV.reloadData()
+        moviesCV.reloadSections(IndexSet(integer: 0))
     }
     
     func insertPopularMovies(at indexPaths: [IndexPath]) {

@@ -42,4 +42,7 @@ class Movie: Codable {
         case releaseDate = "release_date"
     }
     
+    var fullPosterPath: String {
+        return "https://image.tmdb.org/t/p/original/\(self.posterPath)"
+    }
 }
