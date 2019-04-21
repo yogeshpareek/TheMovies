@@ -43,6 +43,6 @@ class Movie: Codable {
     }
     
     var fullPosterPath: String {
-        return "https://image.tmdb.org/t/p/original/\(self.posterPath)"
+        return "\(Constant.MOVIE_DB_IMAGE_BASE_PATH)\(self.posterPath)"
     }
 }

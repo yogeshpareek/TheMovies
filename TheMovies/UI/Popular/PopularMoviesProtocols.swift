@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PopularMoviesWireFrameProtocol: class {
-    func pushMovieDetail(view: PopularMoviesVCProtocol)
+    func pushMovieDetail(view: PopularMoviesVCProtocol, movie: Movie)
 }
 
 protocol PopularMoviesVCProtocol: BaseView {
@@ -25,6 +25,7 @@ protocol PopularMoviesPresenterProtocol: BasePresenter {
     var wireFrame: PopularMoviesWireFrameProtocol? { get set }
     
     func willDisplayCell(at indexPath: IndexPath)
+    func didSeletMovie(at indexPath: IndexPath)
 }
 
 protocol PopularMoviesInputInteractorProtocol: class {

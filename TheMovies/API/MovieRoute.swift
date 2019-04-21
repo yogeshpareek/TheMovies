@@ -12,6 +12,7 @@ import Foundation
 
 enum MovieRoute {
     case popularMovies
+    case movieDetail(id: Int)
 }
 
 extension MovieRoute {
@@ -28,6 +29,8 @@ extension MovieRoute {
         switch self {
         case .popularMovies:
             return "movie/popular"
+        case .movieDetail(let id):
+            return "movie/\(id)"
         }
     }
     
@@ -38,6 +41,8 @@ extension MovieRoute {
     var asRoute: Route {
         switch self {
         case .popularMovies:
+            return Route.getRoute(path: apiEndPoint)
+        case .movieDetail:
             return Route.getRoute(path: apiEndPoint)
         }
     }

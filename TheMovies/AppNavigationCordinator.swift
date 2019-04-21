@@ -14,7 +14,7 @@ class AppNavigationCordinator {
     
     private init() {}
     
-    func createMoviesModule() -> UIViewController {
+    func createPopularMoviesModule() -> UIViewController {
         let vc = UIStoryboard(name: "Popular", bundle: nil)
             .instantiateViewController(withIdentifier: "PopularMoviesVC") as! PopularMoviesVC
         
@@ -30,6 +30,31 @@ class AppNavigationCordinator {
         
         interactor.presenter = presenter
         
+        return vc
+    }
+    
+    func createMovieDetailModule(movie: Movie) -> UIViewController {
+        let vc = UIStoryboard(name: "MovieDetail", bundle: nil)
+            .instantiateViewController(withIdentifier: "MovieDetailVC") as! MovieDetailVC
+        
+        let presenter: MovieDetailPresenterProtocol & MovieDetailOutputInteractorProtocol = MovieDetailPresenter(movie: movie)
+        let interactor: MovieDetailInputInteractorProtocol = MovieDetailInteractor()
+        let wireFrame: MovieDetailWireFrameProtocol = MovieDetailWireFrame()
+        
+        vc.presenter = presenter
+        
+        presenter.view = vc
+        presenter.interactor = interactor
+        presenter.wireFrame = wireFrame
+        
+        interactor.presenter = presenter
+        
+        return vc
+    }
+    
+    func createMovieDetailModule(movieDetailViewModel: MovieDetailViewModel) -> UIViewController {
+        let vc = MovieCastVC()
+        vc.movieViewModel = movieDetailViewModel
         return vc
     }
     

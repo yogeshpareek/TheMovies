@@ -12,5 +12,6 @@ class Constant {
     private init() {}
     
     static let MOVIE_DB_BASE_PATH = "https://api.themoviedb.org/3"
+    static let MOVIE_DB_IMAGE_BASE_PATH = "https://image.tmdb.org/t/p/original"
     static let API_KEY = "9a26e8e71ae86a47650c10a2f5eaa67a"
 }

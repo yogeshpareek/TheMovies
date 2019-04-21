@@ -39,6 +39,11 @@ class PopularMoviesPresenter: PopularMoviesPresenterProtocol {
         interactor?.makePopularMoviesRequest(page: moviesViewModel.page)
     }
     
+    func didSeletMovie(at indexPath: IndexPath) {
+        let movie = moviesViewModel.movie(at: indexPath)
+        wireFrame?.pushMovieDetail(view: view!, movie: movie)
+    }
+    
 }
 
 extension PopularMoviesPresenter: PopularMoviesOutputInteractorProtocol {

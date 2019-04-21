@@ -97,6 +97,10 @@ extension PopularMoviesVC: UICollectionViewDelegate, UICollectionViewDataSource,
         presenter?.willDisplayCell(at: indexPath)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter?.didSeletMovie(at: indexPath)
+    }
+    
 }
 
 extension PopularMoviesVC: PopularMoviesVCProtocol {

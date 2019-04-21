@@ -17,7 +17,7 @@ extension UINavigationBar {
         appearance.barTintColor = UIColor.white
         appearance.tintColor = UIColor.black
         appearance.barStyle = .default
-        appearance.setBackgroundImage(UIImage(), for: .default)
+       // appearance.setBackgroundImage(UIImage(), for: .default)
         appearance.shadowImage = UIImage()
         
         var attrs = [NSAttributedString.Key: Any]()
