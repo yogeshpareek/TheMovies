@@ -12,21 +12,28 @@ protocol PopularMoviesWireFrameProtocol: class {
     func pushMovieDetail(view: PopularMoviesVCProtocol)
 }
 
-protocol PopularMoviesVCProtocol: class {
+protocol PopularMoviesVCProtocol: BaseView {
     var presenter: PopularMoviesPresenterProtocol? { get set }
     
+    func showPopularMovies(viewModel: MovieViewModel)
+    func insertPopularMovies(at indexPaths: [IndexPath])
 }
 
-protocol PopularMoviesPresenterProtocol: class {
+protocol PopularMoviesPresenterProtocol: BasePresenter {
     var view: PopularMoviesVCProtocol? { get set }
     var interactor: PopularMoviesInputInteractorProtocol? { get set }
     var wireFrame: PopularMoviesWireFrameProtocol? { get set }
+    
+    func willDisplayCell(at indexPath: IndexPath)
 }
 
 protocol PopularMoviesInputInteractorProtocol: class {
     var presenter: PopularMoviesOutputInteractorProtocol? { get set }
+    
+    func makePopularMoviesRequest(page: Int)
 }
 
 protocol PopularMoviesOutputInteractorProtocol: class {
-    
+    func onPopularMoviesSuccess(response: PopularMoviesResponse)
+    func onPopularMoviesError(error: APIError)
 }

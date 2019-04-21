@@ -26,5 +26,9 @@ class MovieCVCell: UICollectionViewCell {
         
         layerView.backgroundColor = UIColor.purple.withAlphaComponent(0.12)
     }
+    
+    public func configure(movie: Movie) {
+        labelName.text = movie.title
+    }
 
 }
