@@ -4,9 +4,12 @@ IOS application written using Swift 4.2. It uses VIPER architecture.
 
 ## Images
 
-![alt text](Images/ScreenShot_1.png)
-![alt text](Images/ScreenShot_2.png)
-![alt text](Images/ScreenShot_3.png)
+<p align="center">
+<img src="https://github.com/yogeshpareek09/TheMovies/blob/master/Images/ScreenShot_1.png" width="250">
+<img src="https://github.com/yogeshpareek09/TheMovies/blob/master/Images/ScreenShot_2.png" width="250">
+<img src="https://github.com/yogeshpareek09/TheMovies/blob/master/Images/ScreenShot_3.png" width="250">
+</p>
+<br/><br/>
 
 ### Prerequisites
 

@@ -56,7 +56,7 @@ extension PopularMoviesPresenter: PopularMoviesOutputInteractorProtocol {
     func onPopularMoviesSuccess(response: PopularMoviesResponse) {
         view?.hideLoading()
         moviesViewModel.success(objects: response.results)
-        if moviesViewModel.moviesCount <= moviesViewModel.pageSize {
+        if response.page == 1 {
             view?.showPopularMovies(viewModel: moviesViewModel)
         } else {
             let previousCount = moviesViewModel.moviesCount - response.results.count

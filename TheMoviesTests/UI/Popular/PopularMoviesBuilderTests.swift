@@ -19,7 +19,7 @@ class PopularMoviesBuilderTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        vc = AppNavigationCordinator.shared.createMoviesModule() as? PopularMoviesVC
+        vc = AppNavigationCordinator.shared.createPopularMoviesModule() as? PopularMoviesVC
         presenter = vc.presenter as? PopularMoviesPresenter
         interactor = presenter.interactor as? PopularMoviesInteractor
         wireFrame = presenter.wireFrame as? PopularMoviesWireFrame
