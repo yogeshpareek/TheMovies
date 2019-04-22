@@ -171,6 +171,7 @@
 		2FDE98E5226C87230066471D /* UIMovieCastTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIMovieCastTVCell.xib; sourceTree = "<group>"; };
 		2FDE98E9226CCCE00066471D /* ImageDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadManager.swift; sourceTree = "<group>"; };
 		2FDE98EC226CCEC20066471D /* ImageDownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadOperation.swift; sourceTree = "<group>"; };
+		2FDE98EE226CFB460066471D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +202,7 @@
 		2F8D0938226B51A1000925AF = {
 			isa = PBXGroup;
 			children = (
+				2FDE98EE226CFB460066471D /* README.md */,
 				2F8D0943226B51A2000925AF /* TheMovies */,
 				2F8D095B226B51A3000925AF /* TheMoviesTests */,
 				2F8D0966226B51A3000925AF /* TheMoviesUITests */,
@@ -848,15 +850,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F5RF7TQ4Y9;
+				DEVELOPMENT_TEAM = BSYC5U549A;
 				INFOPLIST_FILE = TheMovies/Config/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yogeshpareek.TheMovies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yogeshparee.TheMovies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -866,15 +871,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F5RF7TQ4Y9;
+				DEVELOPMENT_TEAM = BSYC5U549A;
 				INFOPLIST_FILE = TheMovies/Config/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yogeshpareek.TheMovies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yogeshparee.TheMovies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
