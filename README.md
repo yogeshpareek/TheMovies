@@ -16,15 +16,15 @@ IOS application written using Swift 4.2. It uses VIPER architecture.
 Xcode 10.1
 Swift 4.2
 
-##Improvement, Features, Fixes
+## Improvement, Features, Fixes
 
-🔹Favourite and watchlist, share (feature)
-🔹Search movies already loaded (feature)
-🔹UI Improvement (network api loading, error view)
-🔹Image caching improvement (disk loading)
+* Favourite and watchlist, share (feature)
+* Search movies already loaded (feature)
+* UI Improvement (network api loading, error view)
+* Image caching improvement (disk loading)
 
-##More features to be added
-🔹TV series
+## More features to be added
+* TV series
 
 ## Authors
 
