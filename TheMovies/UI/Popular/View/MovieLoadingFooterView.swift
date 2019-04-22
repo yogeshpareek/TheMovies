@@ -23,8 +23,13 @@ class MovieLoadingFooterView: UICollectionReusableView {
         let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
         activityIndicator.color = UIColor.red
         activityIndicator.startAnimating()
-        activityIndicator.center = self.center
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            ])
     }
     
 }

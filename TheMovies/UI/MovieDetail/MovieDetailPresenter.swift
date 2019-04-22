@@ -29,6 +29,11 @@ class MovieDetailPresenter: MovieDetailPresenterProtocol {
         
     }
     
+    func retryLoadMovieDetail() {
+        view?.hideErrorView()
+        loadMovieDetail()
+    }
+    
     private func loadMovieDetail() {
         view?.showLoading(message: "Loading...")
         interactor?.makeMovieDetailRequest(id: movie.id)

@@ -104,13 +104,17 @@ extension PopularMoviesVC: UICollectionViewDelegate, UICollectionViewDataSource,
 }
 
 extension PopularMoviesVC: PopularMoviesVCProtocol {
-   
+    
+    func showErrorView(type: EmptyErrorType) {
+        self.showError(type: type, delegate: self)
+    }
+    
     func showLoading(message: String) {
         if movieViewModel == nil {
             showCVLoadingFooter = false
             showLoadingView(msg: message)
         } else {
-            showCVLoadingFooter = false
+            showCVLoadingFooter = true
             moviesCV.reloadSections(IndexSet(integer: 0))
         }
     }
@@ -133,6 +137,14 @@ extension PopularMoviesVC: PopularMoviesVCProtocol {
         moviesCV.performBatchUpdates({
             self.moviesCV.insertItems(at: indexPaths)
         }, completion: nil)
+    }
+    
+}
+
+extension PopularMoviesVC: SNEmptyStateViewDelegate {
+    
+    func retryBtnTapped() {
+        presenter?.retryLoadPopularMovies()
     }
     
 }

@@ -30,6 +30,11 @@ class PopularMoviesPresenter: PopularMoviesPresenterProtocol {
         
     }
     
+    func retryLoadPopularMovies() {
+        view?.hideErrorView()
+        loadPopularMovies()
+    }
+    
     private func loadPopularMovies() {
         if moviesViewModel.isLoading {
             return

@@ -45,4 +45,22 @@ class Movie: Codable {
     var fullPosterPath: String {
         return "\(Constant.MOVIE_DB_IMAGE_BASE_PATH)\(self.posterPath)"
     }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        voteCount = try values.decode(Int.self, forKey: .voteCount)
+        id = try values.decode(Int.self, forKey: .id)
+        video = try values.decode(Bool.self, forKey: .video)
+        voteAverage = try values.decode(Float.self, forKey: .voteAverage)
+        title = try values.decode(String.self, forKey: .title)
+        popularity = try values.decode(Float.self, forKey: .popularity)
+        posterPath = try values.decodeIfPresent(String.self, forKey: .posterPath) ?? ""
+        originalLanguage = try values.decode(String.self, forKey: .originalLanguage)
+        originalTitle = try values.decode(String.self, forKey: .originalTitle)
+        genreIds = try values.decode([Int].self, forKey: .genreIds)
+        backdropPath = try values.decodeIfPresent(String.self, forKey: .backdropPath) ?? ""
+        adult = try values.decode(Bool.self, forKey: .adult)
+        overview = try values.decodeIfPresent(String.self, forKey: .overview) ?? ""
+        releaseDate = try values.decode(String.self, forKey: .releaseDate)
+    }
 }

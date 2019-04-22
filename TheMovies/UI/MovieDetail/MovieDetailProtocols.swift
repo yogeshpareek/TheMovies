@@ -23,6 +23,7 @@ protocol MovieDetailPresenterProtocol: BasePresenter {
     var interactor: MovieDetailInputInteractorProtocol? { get set }
     var wireFrame: MovieDetailWireFrameProtocol? { get set }
 
+    func retryLoadMovieDetail()
     func viewAllCast()
 }
 

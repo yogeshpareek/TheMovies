@@ -24,6 +24,7 @@ protocol PopularMoviesPresenterProtocol: BasePresenter {
     var interactor: PopularMoviesInputInteractorProtocol? { get set }
     var wireFrame: PopularMoviesWireFrameProtocol? { get set }
     
+    func retryLoadPopularMovies()
     func willDisplayCell(at indexPath: IndexPath)
     func didSeletMovie(at indexPath: IndexPath)
 }

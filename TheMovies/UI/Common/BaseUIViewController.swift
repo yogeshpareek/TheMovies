@@ -45,7 +45,7 @@ class BaseUIViewController: UIViewController {
             .delegate(with: delegate)
             .action(btn: type.actionBtn)
             .with(title: type.title, subTitle: type.desc, image: type.image)
-            .show()
+            .show(superview: self.view)
     }
     
     func hideError() {

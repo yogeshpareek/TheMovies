@@ -183,4 +183,17 @@ extension MovieDetailVC: MovieDetailVCProtocol {
         
         cvCast.reloadData()
     }
+    
+    func showErrorView(type: EmptyErrorType) {
+        self.showError(type: type, delegate: self)
+    }
+}
+
+extension MovieDetailVC: SNEmptyStateViewDelegate {
+    
+    func retryBtnTapped() {
+        hideError()
+        presenter?.viewDidLoad()
+    }
+    
 }

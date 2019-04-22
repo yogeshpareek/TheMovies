@@ -36,8 +36,9 @@ class ImageDownloadManager {
     public func download(url: String, indexPath: IndexPath?, size: CGSize, completion: @escaping ImageDownloadHandler) {
         if url.isEmpty { return }
         
-        if let cachedImage = imageCache.object(forKey: url as NSString) {
-            print("ImageLoader - Loaded from memory cache \(url)")
+        let requiredUrl = "\(url)\(size.width)x\(size.height)"
+        
+        if let cachedImage = imageCache.object(forKey: requiredUrl as NSString) {
             completion(cachedImage, url, indexPath, nil)
         } else {
             let fileName = url.components(separatedBy: "/").last!
@@ -45,14 +46,12 @@ class ImageDownloadManager {
             let scaleFile = cacheDir.appendingPathComponent("\(fileName)\(size.width)x\(size.height)")
             
             if fileManager.fileExists(atPath: scaleFile.relativePath), let data = try? Data(contentsOf: scaleFile), let image = UIImage(data: data), let scaledImage = image.resizedImageWith(image: image, targetSize: size)  {
-                 print("ImageLoader - Loaded from disk cache \(url) \(scaledImage   .size)")
-                imageCache.setObject(scaledImage, forKey: scaleFile.relativePath as NSString)
+                imageCache.setObject(scaledImage, forKey: requiredUrl as NSString)
                 completion(scaledImage, url, indexPath, nil)
                 
             } else if fileManager.fileExists(atPath: originalFile.relativePath), let data = try? Data(contentsOf: originalFile), let image = UIImage(data: data), let scaleImage = image.resizedImageWith(image: image, targetSize: size)  {
-                 print("ImageLoader - Loaded from disk cache & scaled \(url) \(scaleImage.size)")
                 saveImageToDisk(originalImage: nil, scaledImage: scaleImage, url: url, size: size)
-                imageCache.setObject(scaleImage, forKey: scaleFile.relativePath as NSString)
+                imageCache.setObject(scaleImage, forKey: requiredUrl as NSString)
                 completion(image, url, indexPath, nil)
                 
             } else if let ongoingOperation = imageDownloadQueue.operations as? [ImageDownloadOperation],
@@ -72,9 +71,9 @@ class ImageDownloadManager {
         imageOperation.queuePriority = .veryHigh
         imageOperation.downloadCompletionHandler = { [unowned self] (image, url, indexPath, error) in
             if let _image = image, let scaledImage = _image.resizedImageWith(image: _image, targetSize: size) {
-                 print("ImageLoader - Loaded from web \(url) \(scaledImage.size)")
+                let requiredUrl = "\(url)\(size.width)x\(size.height)"
                 self.saveImageToDisk(originalImage: _image, scaledImage: scaledImage, url: url, size: size)
-                self.imageCache.setObject(scaledImage, forKey: url as NSString)
+                self.imageCache.setObject(scaledImage, forKey: requiredUrl as NSString)
                 completion(_image, url, indexPath, error)
             }
         }
@@ -87,13 +86,11 @@ class ImageDownloadManager {
             let originalFile = self.cacheDir.appendingPathComponent("\(fileName)")
             let scaleFile = self.cacheDir.appendingPathComponent("\(fileName)\(size.width)x\(size.height)")
             
-            if let _origImage = originalImage {
-                print("ImageLoader - Saved Original image \(originalFile.absoluteString) \(originalFile.relativePath)")
+            if let _origImage = originalImage, !self.fileManager.fileExists(atPath: originalFile.relativePath) {
                 try? _origImage.jpegData(compressionQuality: 1)?.write(to: originalFile)
             }
             
-            if let _scaleImage = scaledImage {
-                print("ImageLoader - Saved scaled image \(scaleFile.absoluteString)")
+            if let _scaleImage = scaledImage, !self.fileManager.fileExists(atPath: scaleFile.relativePath) {
                 try? _scaleImage.jpegData(compressionQuality: 1)?.write(to: scaleFile)
             }
         }

@@ -23,10 +23,6 @@ protocol BaseView: class {
 
 extension BaseView where Self: BaseUIViewController {
     
-    func showErrorView(type: EmptyErrorType) {
-        self.showError(type: type)
-    }
-    
     func hideErrorView() {
         self.hideError()
     }
