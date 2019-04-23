@@ -61,6 +61,7 @@ class PopularMoviesInteractorOutputMock: PopularMoviesOutputInteractorProtocol {
 }
 
 class PopularMoviesInteractorMock: PopularMoviesInputInteractorProtocol {
+    
     weak var presenter: PopularMoviesOutputInteractorProtocol?
     var client: HTTPClientSerivce
     var requestCalled: Bool = false
@@ -85,6 +86,12 @@ class PopularMoviesInteractorMock: PopularMoviesInputInteractorProtocol {
                 break
             }
         }
+    }
+    
+    func toogleFav(movie: Movie) {}
+    
+    func isFav(movie: Movie) -> Bool {
+        return true
     }
     
 

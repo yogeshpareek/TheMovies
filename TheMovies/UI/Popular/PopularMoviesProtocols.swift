@@ -9,7 +9,8 @@
 import Foundation
 
 protocol PopularMoviesWireFrameProtocol: class {
-    func pushMovieDetail(view: PopularMoviesVCProtocol, movie: Movie)
+    func pushMovieDetailVC(view: PopularMoviesVCProtocol, movie: Movie)
+    func pushAllFavMoviesVC(view: PopularMoviesVCProtocol)
 }
 
 protocol PopularMoviesVCProtocol: BaseView {
@@ -17,6 +18,7 @@ protocol PopularMoviesVCProtocol: BaseView {
     
     func showPopularMovies(viewModel: MovieViewModel)
     func insertPopularMovies(at indexPaths: [IndexPath])
+    func reloadPopularMovies(at indexPaths: [IndexPath])
 }
 
 protocol PopularMoviesPresenterProtocol: BasePresenter {
@@ -27,12 +29,16 @@ protocol PopularMoviesPresenterProtocol: BasePresenter {
     func retryLoadPopularMovies()
     func willDisplayCell(at indexPath: IndexPath)
     func didSeletMovie(at indexPath: IndexPath)
+    func selectedAllFavMovie()
+    func selectedFav(at indexPath: IndexPath)
 }
 
 protocol PopularMoviesInputInteractorProtocol: class {
     var presenter: PopularMoviesOutputInteractorProtocol? { get set }
     
     func makePopularMoviesRequest(page: Int)
+    func toogleFav(movie: Movie)
+    func isFav(movie: Movie) -> Bool
 }
 
 protocol PopularMoviesOutputInteractorProtocol: class {

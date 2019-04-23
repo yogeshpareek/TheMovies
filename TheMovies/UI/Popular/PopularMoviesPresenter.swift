@@ -15,6 +15,7 @@ class PopularMoviesPresenter: PopularMoviesPresenterProtocol {
     var wireFrame: PopularMoviesWireFrameProtocol?
     
     private var moviesViewModel: MovieViewModel = MovieViewModel(pageSize: 20)
+    private var lastSelectedIndexPath: IndexPath?
     
     func willDisplayCell(at indexPath: IndexPath) {
         if moviesViewModel.canLoadNow(index: indexPath.row) {
@@ -27,7 +28,15 @@ class PopularMoviesPresenter: PopularMoviesPresenterProtocol {
     }
     
     func viewWillAppear() {
-        
+        if let indexPath = lastSelectedIndexPath {
+            view?.reloadPopularMovies(at: [indexPath])
+            lastSelectedIndexPath = nil
+        } else {
+            _ = moviesViewModel.data.map {
+                $0.isFav = interactor?.isFav(movie: $0) ?? false
+            }
+            view?.reloadPopularMovies(at: [])
+        }
     }
     
     func retryLoadPopularMovies() {
@@ -46,7 +55,17 @@ class PopularMoviesPresenter: PopularMoviesPresenterProtocol {
     
     func didSeletMovie(at indexPath: IndexPath) {
         let movie = moviesViewModel.movie(at: indexPath)
-        wireFrame?.pushMovieDetail(view: view!, movie: movie)
+        lastSelectedIndexPath = indexPath
+        wireFrame?.pushMovieDetailVC(view: view!, movie: movie)
+    }
+    
+    func selectedAllFavMovie() {
+        wireFrame?.pushAllFavMoviesVC(view: view!)
+    }
+    
+    func selectedFav(at indexPath: IndexPath) {
+        let movie = moviesViewModel.movie(at: indexPath)
+        interactor?.toogleFav(movie: movie)
     }
     
 }
@@ -55,6 +74,7 @@ extension PopularMoviesPresenter: PopularMoviesOutputInteractorProtocol {
     
     func onPopularMoviesSuccess(response: PopularMoviesResponse) {
         view?.hideLoading()
+        _ = response.results.map { $0.isFav = interactor?.isFav(movie: $0) ?? false }
         moviesViewModel.success(objects: response.results)
         if response.page == 1 {
             view?.showPopularMovies(viewModel: moviesViewModel)

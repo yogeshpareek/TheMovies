@@ -17,6 +17,9 @@
 		2F8D097E226B5409000925AF /* PopularMoviesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8D097D226B5409000925AF /* PopularMoviesVC.swift */; };
 		2F8D0982226B546E000925AF /* MovieCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8D0981226B546E000925AF /* MovieCVCell.swift */; };
 		2F8D0984226B547A000925AF /* UIMovieCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F8D0983226B547A000925AF /* UIMovieCVCell.xib */; };
+		2FCD4B73226E31BB004274FA /* MovieFavManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B72226E31BB004274FA /* MovieFavManager.swift */; };
+		2FCD4B76226E32D7004274FA /* FavMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B74226E32D7004274FA /* FavMovie.swift */; };
+		2FCD4B79226E3C8A004274FA /* FavMovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD4B78226E3C8A004274FA /* FavMovieVC.swift */; };
 		2FDE9865226B57B80066471D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FDE9863226B57740066471D /* Montserrat-Bold.ttf */; };
 		2FDE9866226B57B80066471D /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FDE9860226B57740066471D /* Montserrat-Light.ttf */; };
 		2FDE9867226B57B80066471D /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FDE9862226B57740066471D /* Montserrat-Medium.ttf */; };
@@ -114,6 +117,9 @@
 		2F8D097D226B5409000925AF /* PopularMoviesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesVC.swift; sourceTree = "<group>"; };
 		2F8D0981226B546E000925AF /* MovieCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCVCell.swift; sourceTree = "<group>"; };
 		2F8D0983226B547A000925AF /* UIMovieCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIMovieCVCell.xib; sourceTree = "<group>"; };
+		2FCD4B72226E31BB004274FA /* MovieFavManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFavManager.swift; sourceTree = "<group>"; };
+		2FCD4B74226E32D7004274FA /* FavMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavMovie.swift; sourceTree = "<group>"; };
+		2FCD4B78226E3C8A004274FA /* FavMovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavMovieVC.swift; sourceTree = "<group>"; };
 		2FDE9860226B57740066471D /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		2FDE9861226B57740066471D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		2FDE9862226B57740066471D /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
@@ -274,6 +280,7 @@
 		2F8D0976226B5316000925AF /* DB */ = {
 			isa = PBXGroup;
 			children = (
+				2FCD4B74226E32D7004274FA /* FavMovie.swift */,
 				2F8D094B226B51A2000925AF /* TheMovies.xcdatamodeld */,
 			);
 			path = DB;
@@ -303,6 +310,7 @@
 		2F8D0979226B532E000925AF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2FCD4B7A226E3CA9004274FA /* FavMovie */,
 				2FDE98CD226C6DEF0066471D /* MovieCast */,
 				2FDE98C0226C64420066471D /* MovieDetail */,
 				2F8D0980226B5457000925AF /* Common */,
@@ -349,6 +357,22 @@
 				2FDE98A3226C0D040066471D /* PaginationViewModel.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		2FCD4B71226E31A2004274FA /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				2FCD4B72226E31BB004274FA /* MovieFavManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		2FCD4B7A226E3CA9004274FA /* FavMovie */ = {
+			isa = PBXGroup;
+			children = (
+				2FCD4B78226E3C8A004274FA /* FavMovieVC.swift */,
+			);
+			path = FavMovie;
 			sourceTree = "<group>";
 		};
 		2FDE985F226B57510066471D /* Fonts */ = {
@@ -481,6 +505,7 @@
 		2FDE98E7226CCCC20066471D /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				2FCD4B71226E31A2004274FA /* DataManager */,
 				2FDE98E8226CCCCE0066471D /* ImageLoader */,
 			);
 			path = Manager;
@@ -649,6 +674,7 @@
 				2FDE986F226B5DEF0066471D /* UINavigationBar+Ext.swift in Sources */,
 				2FDE9881226B64250066471D /* PopularMoviesRequest.swift in Sources */,
 				2FDE9898226B842F0066471D /* HTTPClient.swift in Sources */,
+				2FCD4B79226E3C8A004274FA /* FavMovieVC.swift in Sources */,
 				2F8D094D226B51A2000925AF /* TheMovies.xcdatamodeld in Sources */,
 				2FDE98CF226C6DFD0066471D /* MovieCastVC.swift in Sources */,
 				2FDE9892226B68960066471D /* EmptyErrorType.swift in Sources */,
@@ -657,6 +683,7 @@
 				2F8D0945226B51A2000925AF /* AppDelegate.swift in Sources */,
 				2FDE989A226B84A40066471D /* APIError.swift in Sources */,
 				2FDE9877226B61380066471D /* PopularMoviesInteractor.swift in Sources */,
+				2FCD4B73226E31BB004274FA /* MovieFavManager.swift in Sources */,
 				2FDE98C6226C6DC30066471D /* MovieDetailProtocols.swift in Sources */,
 				2FDE98A2226C0A270066471D /* MovieViewModel.swift in Sources */,
 				2FDE98D6226C741A0066471D /* MovieCastCVCell.swift in Sources */,
@@ -676,6 +703,7 @@
 				2FDE98CA226C6DE00066471D /* MovieDetailInteractor.swift in Sources */,
 				2FDE98E0226C7C440066471D /* MovieCast.swift in Sources */,
 				2FDE989E226B87690066471D /* MovieRoute.swift in Sources */,
+				2FCD4B76226E32D7004274FA /* FavMovie.swift in Sources */,
 				2F8D0982226B546E000925AF /* MovieCVCell.swift in Sources */,
 				2FDE988D226B67710066471D /* BaseUIViewController.swift in Sources */,
 				2FDE98C8226C6DD00066471D /* MovieDetailPresenter.swift in Sources */,

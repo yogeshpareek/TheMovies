@@ -51,6 +51,14 @@ class PopularMoviesVC: BaseUIViewController {
         let itemWidth: CGFloat = (UIScreen.main.bounds.width - ((numberOfColumns + 1) * spacing))/numberOfColumns
         let itemHeight: CGFloat = itemWidth * (3/2)
         flowLayout.itemSize = CGSize(width: itemWidth, height: itemHeight)
+        
+        let favNavBtn = UIBarButtonItem(image: UIImage(named: "ic_fav_normal"), style: .plain, target: self, action: #selector(navFavTapped))
+        
+        navigationItem.rightBarButtonItem = favNavBtn
+    }
+    
+    @objc private func navFavTapped() {
+        presenter?.selectedAllFavMovie()
     }
     
 }
@@ -74,7 +82,7 @@ extension PopularMoviesVC: UICollectionViewDelegate, UICollectionViewDataSource,
             return cell
         }
         let movie = viewModel.movie(at: indexPath)
-        cell.configure(movie: movie, indexPath: indexPath)
+        cell.configure(delegate: self, movie: movie, indexPath: indexPath)
         return cell
     }
     
@@ -139,12 +147,32 @@ extension PopularMoviesVC: PopularMoviesVCProtocol {
         }, completion: nil)
     }
     
+    func reloadPopularMovies(at indexPaths: [IndexPath]) {
+        if indexPaths.isEmpty {
+            let index = moviesCV.indexPathsForVisibleItems
+            moviesCV.reloadItems(at: index)
+        } else {
+            moviesCV.reloadItems(at: indexPaths)
+        }
+    }
+    
 }
 
 extension PopularMoviesVC: SNEmptyStateViewDelegate {
     
     func retryBtnTapped() {
         presenter?.retryLoadPopularMovies()
+    }
+    
+}
+
+extension PopularMoviesVC: MovieCVCellDelegate {
+    
+    func movieFavTapped(for cell: MovieCVCell) {
+        guard let indexPath = self.moviesCV.indexPath(for: cell) else {
+            return
+        }
+        presenter?.selectedFav(at: indexPath)
     }
     
 }

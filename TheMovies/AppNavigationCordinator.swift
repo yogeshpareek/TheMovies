@@ -19,7 +19,8 @@ class AppNavigationCordinator {
             .instantiateViewController(withIdentifier: "PopularMoviesVC") as! PopularMoviesVC
         
         let presenter: PopularMoviesPresenterProtocol & PopularMoviesOutputInteractorProtocol = PopularMoviesPresenter()
-        let interactor: PopularMoviesInputInteractorProtocol = PopularMoviesInteractor()
+        let favManager = MovieFavManager.shared
+        let interactor: PopularMoviesInputInteractorProtocol = PopularMoviesInteractor(manager: favManager)
         let wireFrame: PopularMoviesWireFrameProtocol = PopularMoviesWireFrame()
         
         vc.presenter = presenter
@@ -38,7 +39,8 @@ class AppNavigationCordinator {
             .instantiateViewController(withIdentifier: "MovieDetailVC") as! MovieDetailVC
         
         let presenter: MovieDetailPresenterProtocol & MovieDetailOutputInteractorProtocol = MovieDetailPresenter(movie: movie)
-        let interactor: MovieDetailInputInteractorProtocol = MovieDetailInteractor()
+        let favManager = MovieFavManager.shared
+        let interactor: MovieDetailInputInteractorProtocol = MovieDetailInteractor(manager: favManager)
         let wireFrame: MovieDetailWireFrameProtocol = MovieDetailWireFrame()
         
         vc.presenter = presenter
@@ -55,6 +57,11 @@ class AppNavigationCordinator {
     func createMovieDetailModule(movieDetailViewModel: MovieDetailViewModel) -> UIViewController {
         let vc = MovieCastVC()
         vc.movieViewModel = movieDetailViewModel
+        return vc
+    }
+    
+    func createAllFavMoviesModule() -> UIViewController {
+        let vc = FavMovieVC()
         return vc
     }
     

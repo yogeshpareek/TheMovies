@@ -25,12 +25,15 @@ protocol MovieDetailPresenterProtocol: BasePresenter {
 
     func retryLoadMovieDetail()
     func viewAllCast()
+    func selectFav()
 }
 
 protocol MovieDetailInputInteractorProtocol: class {
     var presenter: MovieDetailOutputInteractorProtocol? { get set }
     
     func makeMovieDetailRequest(id: Int)
+    func toogleFav(movie: Movie)
+    func isFav(movie: Movie) -> Bool
 }
 
 protocol MovieDetailOutputInteractorProtocol: class {

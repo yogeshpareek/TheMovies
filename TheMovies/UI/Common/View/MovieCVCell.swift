@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol MovieCVCellDelegate {
+    func movieFavTapped(for cell: MovieCVCell)
+}
+
 class MovieCVCell: UICollectionViewCell {
     
     @IBOutlet weak var ivMovie: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var layerView: UIView!
     @IBOutlet weak var btnFav: UIButton!
+    
+    private var delegate: MovieCVCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,13 +43,23 @@ class MovieCVCell: UICollectionViewCell {
         ivMovie.image = nil
     }
     
-    public func configure(movie: Movie, indexPath: IndexPath) {
+    public func configure(delegate: MovieCVCellDelegate, movie: Movie, indexPath: IndexPath) {
+        self.delegate = delegate
         labelName.text = movie.title
         ivMovie.load(url: movie.fullPosterPath, indexPath: indexPath)
+        btnFav.isSelected = movie.isFav
+    }
+    
+    public func configure(delegate: MovieCVCellDelegate, movie: FavMovie, indexPath: IndexPath) {
+        self.delegate = delegate
+        labelName.text = movie.name
+        ivMovie.load(url: movie.moviePosterPath, indexPath: indexPath)
+        btnFav.isSelected = true
     }
     
     @objc private func btnFavTapped() {
         btnFav.isSelected = !btnFav.isSelected
+        delegate?.movieFavTapped(for: self)
     }
 
 }

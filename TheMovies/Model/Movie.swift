@@ -24,6 +24,7 @@ class Movie: Codable {
     var adult: Bool = false
     var overview: String = ""
     var releaseDate: String = ""
+    var isFav: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case voteCount = "vote_count"
@@ -44,6 +45,13 @@ class Movie: Codable {
     
     var fullPosterPath: String {
         return "\(Constant.MOVIE_DB_IMAGE_BASE_PATH)\(self.posterPath)"
+    }
+    
+    init(movie: FavMovie) {
+        self.title = movie.name
+        self.id = Int(movie.movieId)
+        self.posterPath = "/" + (movie.moviePosterPath.components(separatedBy: "/").last ?? "")
+        self.isFav = true
     }
     
     required init(from decoder: Decoder) throws {

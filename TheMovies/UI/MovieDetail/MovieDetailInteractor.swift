@@ -11,6 +11,27 @@ import Foundation
 class MovieDetailInteractor: MovieDetailInputInteractorProtocol {
     
     weak var presenter: MovieDetailOutputInteractorProtocol?
+    private var favManager: MovieFavManager
+    
+    init(manager: MovieFavManager) {
+        self.favManager = manager
+    }
+    
+    func toogleFav(movie: Movie) {
+        if let fav = favManager.isFav(movie: movie) {
+            //favManager.remove(favMovie: fav)
+            favManager.remove(objectID: fav.objectID)
+        } else {
+            favManager.insertFavMovie(movie: movie)
+        }
+    }
+    
+    func isFav(movie: Movie) -> Bool {
+        if favManager.isFav(movie: movie) != nil {
+            return true
+        }
+        return false
+    }
     
     func makeMovieDetailRequest(id: Int) {
         MovieDetailRequest(id: id).response { [weak self] (result) in

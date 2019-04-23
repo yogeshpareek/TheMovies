@@ -85,6 +85,7 @@ class MovieDetailVC: BaseUIViewController {
             break
         case btnFav:
             btnFav.isSelected = !btnFav.isSelected
+            presenter?.selectFav()
             break
         default:
             break
@@ -180,6 +181,8 @@ extension MovieDetailVC: MovieDetailVCProtocol {
         
         btnRating.setTitle(viewModel.ratingText, for: .normal)
         btnTime.setTitle("\(viewModel.movieDetail.runtime) mins", for: .normal)
+        
+        btnFav.isSelected = viewModel.isFav
         
         cvCast.reloadData()
     }

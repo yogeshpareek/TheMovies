@@ -94,13 +94,19 @@ class PopularMoviesVCMock: BaseUIViewController, PopularMoviesVCProtocol {
         insertPopularMovies = true
     }
     
+    func reloadPopularMovies(at indexPaths: [IndexPath]) {}
+    
 }
 
 class PopularMoviesWireFrameMock: PopularMoviesWireFrameProtocol {
     var movieDetailSuccess: Bool = false
     
-    func pushMovieDetail(view: PopularMoviesVCProtocol, movie: Movie) {
+    func pushMovieDetailVC(view: PopularMoviesVCProtocol, movie: Movie) {
         movieDetailSuccess = true
+    }
+    
+    func pushAllFavMoviesVC(view: PopularMoviesVCProtocol) {
+        
     }
 }
 
@@ -124,7 +130,7 @@ class PopularMoviesPresenterMock: PopularMoviesPresenterProtocol, PopularMoviesO
     }
     
     func didSeletMovie(at indexPath: IndexPath) {
-        wireFrame?.pushMovieDetail(view: view!, movie: moviesViewModel.movie(at: indexPath))
+        wireFrame?.pushMovieDetailVC(view: view!, movie: moviesViewModel.movie(at: indexPath))
         seletMovie = true
     }
     
@@ -161,6 +167,10 @@ class PopularMoviesPresenterMock: PopularMoviesPresenterProtocol, PopularMoviesO
     }
     
     func viewWillAppear() {}
+    
+    func selectedAllFavMovie() {}
+    
+    func selectedFav(at indexPath: IndexPath) {}
     
 }
 

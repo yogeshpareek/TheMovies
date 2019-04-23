@@ -11,9 +11,15 @@ import Foundation
 class MovieDetailViewModel {
     
     private(set) var movieDetail: MovieDetail
+    private(set) var isFav: Bool = false
     
-    init(movieDetail: MovieDetail) {
+    init(movieDetail: MovieDetail, isFav: Bool) {
         self.movieDetail = movieDetail
+        self.isFav = isFav
+    }
+    
+    func toggleFav() {
+        isFav = !isFav
     }
     
     var castCount: Int {

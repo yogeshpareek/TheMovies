@@ -29,6 +29,12 @@ class MovieDetailPresenter: MovieDetailPresenterProtocol {
         
     }
     
+    func selectFav() {
+        movieDetailViewModel?.toggleFav()
+        movie.isFav = !movie.isFav
+        interactor?.toogleFav(movie: movie)
+    }
+    
     func retryLoadMovieDetail() {
         view?.hideErrorView()
         loadMovieDetail()
@@ -51,7 +57,8 @@ extension MovieDetailPresenter: MovieDetailOutputInteractorProtocol {
     
     func onMovieDetailSuccess(response: MovieDetail) {
         view?.hideLoading()
-        movieDetailViewModel = MovieDetailViewModel(movieDetail: response)
+        let isFav = interactor?.isFav(movie: movie) ?? false
+        movieDetailViewModel = MovieDetailViewModel(movieDetail: response, isFav: isFav)
         view?.showMovieDetail(viewModel: movieDetailViewModel!)
     }
     
