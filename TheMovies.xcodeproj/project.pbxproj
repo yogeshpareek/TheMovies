@@ -81,6 +81,7 @@
 		2FDE98ED226CCEC20066471D /* ImageDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE98EC226CCEC20066471D /* ImageDownloadOperation.swift */; };
 		2FDE98F0226D51F10066471D /* PopularMoviesInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE98EF226D51F10066471D /* PopularMoviesInteractorTests.swift */; };
 		2FDE98F2226D52030066471D /* PopularMoviesPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE98F1226D52030066471D /* PopularMoviesPresenterTests.swift */; };
+		2FDE98F4226D68070066471D /* FileLoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDE98F3226D68070066471D /* FileLoadOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,7 @@
 		2FDE98EE226CFB460066471D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2FDE98EF226D51F10066471D /* PopularMoviesInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesInteractorTests.swift; sourceTree = "<group>"; };
 		2FDE98F1226D52030066471D /* PopularMoviesPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesPresenterTests.swift; sourceTree = "<group>"; };
+		2FDE98F3226D68070066471D /* FileLoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoadOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -516,6 +518,7 @@
 			children = (
 				2FDE98E9226CCCE00066471D /* ImageDownloadManager.swift */,
 				2FDE98EC226CCEC20066471D /* ImageDownloadOperation.swift */,
+				2FDE98F3226D68070066471D /* FileLoadOperation.swift */,
 			);
 			path = ImageLoader;
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 				2FCD4B73226E31BB004274FA /* MovieFavManager.swift in Sources */,
 				2FDE98C6226C6DC30066471D /* MovieDetailProtocols.swift in Sources */,
 				2FDE98A2226C0A270066471D /* MovieViewModel.swift in Sources */,
+				2FDE98F4226D68070066471D /* FileLoadOperation.swift in Sources */,
 				2FDE98D6226C741A0066471D /* MovieCastCVCell.swift in Sources */,
 				2FDE98DA226C7BFF0066471D /* MovieDetail.swift in Sources */,
 				2FDE987C226B61800066471D /* AppNavigationCordinator.swift in Sources */,

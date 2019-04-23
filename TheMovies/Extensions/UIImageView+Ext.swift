@@ -13,7 +13,9 @@ extension UIImageView {
     func load(url: String, indexPath: IndexPath) {
         ImageDownloadManager.shared.download(url: url, indexPath: indexPath, size: self.frame.size) { (image, url, indexPathh, error) in
             if let _image = image, let _indexPath = indexPathh, _indexPath == indexPath {
-                self.image = _image
+                DispatchQueue.main.async {
+                    self.image = _image
+                }
             }
         }
     }
@@ -21,7 +23,9 @@ extension UIImageView {
     func load(url: String) {
         ImageDownloadManager.shared.download(url: url, indexPath: nil, size: self.frame.size) { (image, url, indexPathh, error) in
             if let _image = image {
-                self.image = _image
+                DispatchQueue.main.async {
+                    self.image = _image
+                }
             }
         }
     }

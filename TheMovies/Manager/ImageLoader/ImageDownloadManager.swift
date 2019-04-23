@@ -21,6 +21,13 @@ class ImageDownloadManager {
         return queue
     }()
     
+    lazy var diskCacheQueue: OperationQueue = {
+        var queue = OperationQueue()
+        queue.name = "com.moviedb.diskcachequeue"
+        queue.qualityOfService = .userInteractive
+        return queue
+    }()
+    
     private let imageCache = NSCache<NSString, UIImage>()
     private let cacheDir: URL
     private let fileManager: FileManager
@@ -41,36 +48,42 @@ class ImageDownloadManager {
         if let cachedImage = imageCache.object(forKey: requiredUrl as NSString) {
             completion(cachedImage, url, indexPath, nil)
         } else {
-            let fileName = url.components(separatedBy: "/").last!
-            let originalFile = cacheDir.appendingPathComponent("\(fileName)")
-            let scaleFile = cacheDir.appendingPathComponent("\(fileName)\(size.width)x\(size.height)")
             
-            if fileManager.fileExists(atPath: scaleFile.relativePath), let data = try? Data(contentsOf: scaleFile), let image = UIImage(data: data), let scaledImage = image.resizedImageWith(image: image, targetSize: size)  {
-                imageCache.setObject(scaledImage, forKey: requiredUrl as NSString)
-                completion(scaledImage, url, indexPath, nil)
-                
-            } else if fileManager.fileExists(atPath: originalFile.relativePath), let data = try? Data(contentsOf: originalFile), let image = UIImage(data: data), let scaleImage = image.resizedImageWith(image: image, targetSize: size)  {
-                saveImageToDisk(originalImage: nil, scaledImage: scaleImage, url: url, size: size)
-                imageCache.setObject(scaleImage, forKey: requiredUrl as NSString)
-                completion(image, url, indexPath, nil)
-                
-            } else if let ongoingOperation = imageDownloadQueue.operations as? [ImageDownloadOperation],
+            if let ongoingOperation = imageDownloadQueue.operations as? [ImageDownloadOperation],
                 let imgOperation = ongoingOperation.first(where: {
                     return ($0.imagePath == url) && $0.isExecuting && !$0.isFinished
                 }) {
                 imgOperation.queuePriority = .high
             } else {
-                addToOperation(url: url, indexPath: indexPath, size: size, completion: completion)
+                addToFileLoadOperation(url: url, indexPath: indexPath, size: size, completion: completion)
             }
+            
         }
     }
     
-    //size: CGSize, scale: CGFloat,
+    private func addToFileLoadOperation(url: String, indexPath: IndexPath?, size: CGSize, completion: @escaping ImageDownloadHandler) {
+        let operation = FileLoadOperation(url: url, size: size, indexPath: indexPath, cacheDir: cacheDir, fileManager: fileManager)
+        operation.queuePriority = .veryHigh
+        operation.downloadCompletionHandler = { [unowned self] (image, url, indexPath, size) in
+            
+            if let _image = image {
+                let requiredUrl = "\(url)\(size.width)x\(size.height)"
+                self.imageCache.setObject(_image, forKey: requiredUrl as NSString)
+                completion(_image, url, indexPath, nil)
+            } else {
+                self.addToOperation(url: url, indexPath: indexPath, size: size, completion: completion)
+            }
+            
+        }
+        diskCacheQueue.addOperation(operation)
+    }
+    
     private func addToOperation(url: String, indexPath: IndexPath?, size: CGSize, completion: @escaping ImageDownloadHandler) {
         let imageOperation = ImageDownloadOperation(url: url, size: size, indexPath: indexPath)
         imageOperation.queuePriority = .veryHigh
         imageOperation.downloadCompletionHandler = { [unowned self] (image, url, indexPath, error) in
-            if let _image = image, let scaledImage = _image.resizedImageWith(image: _image, targetSize: size) {
+            if let _image = image,
+                let scaledImage = _image.resizedImageWith(image: _image, targetSize: size) {
                 let requiredUrl = "\(url)\(size.width)x\(size.height)"
                 self.saveImageToDisk(originalImage: _image, scaledImage: scaledImage, url: url, size: size)
                 self.imageCache.setObject(scaledImage, forKey: requiredUrl as NSString)
