@@ -55,10 +55,45 @@ class PopularMoviesVC: BaseUIViewController {
         let favNavBtn = UIBarButtonItem(image: UIImage(named: "ic_fav_normal"), style: .plain, target: self, action: #selector(navFavTapped))
         
         navigationItem.rightBarButtonItem = favNavBtn
+        
+        // Set SearchController
+        let searchVC = AppNavigationCordinator.shared.createSearchMoviesModule(delegate: self)
+        let searchController = UISearchController(searchResultsController: searchVC)
+        if #available(iOS 11, *) {
+            searchController.obscuresBackgroundDuringPresentation = true
+        } else {
+            searchController.dimsBackgroundDuringPresentation = true
+        }
+        definesPresentationContext = true
+        searchController.searchResultsUpdater = nil
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.delegate = searchVC as? UISearchBarDelegate
+        searchController.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = true
+
+        if #available(iOS 11, *) {
+            navigationItem.searchController = searchController
+            //navigationController?.navigationBar.prefersLargeTitles = true
+            navigationItem.hidesSearchBarWhenScrolling = false
+        } else {
+            navigationItem.titleView = searchController.view
+        }
+        definesPresentationContext = true
     }
     
     @objc private func navFavTapped() {
         presenter?.selectedAllFavMovie()
+    }
+    
+}
+
+extension PopularMoviesVC: UISearchControllerDelegate {
+    
+    func willPresentSearchController(_ searchController: UISearchController) {
+        guard let vc = searchController.searchResultsController as? MovieSearchResultVC, let _model = movieViewModel, let presenter = vc.presenter else {
+            return
+        }
+        presenter.setFilterMovies(movies: _model.data)
     }
     
 }
@@ -173,6 +208,14 @@ extension PopularMoviesVC: MovieCVCellDelegate {
             return
         }
         presenter?.selectedFav(at: indexPath)
+    }
+    
+}
+
+extension PopularMoviesVC: MovieSearchResultVCDelegate {
+   
+    func movieSeachVC(tappedMovie index: IndexPath) {
+        presenter?.didSeletMovie(at: index)
     }
     
 }

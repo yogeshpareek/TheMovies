@@ -59,6 +59,14 @@ class MovieFavManager {
         return allFav.filter { $0.movieId == Int32(movie.id) }.first
     }
     
+    func toggleFav(movie: Movie) {
+        if let fav = isFav(movie: movie) {
+            remove(objectID: fav.objectID)
+        } else {
+            insertFavMovie(movie: movie)
+        }
+    }
+    
     public func fetchAll() -> [FavMovie] {
         let request: NSFetchRequest<FavMovie> = FavMovie.fetchRequest()
         let results = try? persistentContainer.viewContext.fetch(request)

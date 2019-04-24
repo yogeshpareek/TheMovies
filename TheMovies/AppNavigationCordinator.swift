@@ -65,6 +65,25 @@ class AppNavigationCordinator {
         return vc
     }
     
+    func createSearchMoviesModule(delegate: MovieSearchResultVCDelegate?) -> UIViewController {
+        let vc = MovieSearchResultVC()
+        
+        let presenter: MovieSearchPresenterProtocol & MovieSearchOutputInteractorProtocol = MovieSearchPresenter(delegate: delegate)
+        let favManager = MovieFavManager.shared
+        let interactor: MovieSearchInputInteractorProtocol = MovieSearchInteractor(manager: favManager)
+        let wireFrame: MovieSearchWireFrameProtocol = MovieSearchWireFrame()
+        
+        vc.presenter = presenter
+        
+        presenter.view = vc
+        presenter.interactor = interactor
+        presenter.wireFrame = wireFrame
+        
+        interactor.presenter = presenter
+        
+        return vc
+    }
+    
 }
 
 

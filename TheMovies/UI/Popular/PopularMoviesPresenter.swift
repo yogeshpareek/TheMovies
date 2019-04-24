@@ -65,6 +65,7 @@ class PopularMoviesPresenter: PopularMoviesPresenterProtocol {
     
     func selectedFav(at indexPath: IndexPath) {
         let movie = moviesViewModel.movie(at: indexPath)
+        movie.isFav = !movie.isFav
         interactor?.toogleFav(movie: movie)
     }
     
