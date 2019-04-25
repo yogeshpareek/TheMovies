@@ -98,8 +98,11 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyM-7l-S1k">
                                                         <rect key="frame" x="0.0" y="0.0" width="118.5" height="75"/>
-                                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                                        <state key="normal" image="ic_watchlist"/>
+                                                        <inset key="titleEdgeInsets" minX="-70" minY="40" maxX="0.0" maxY="0.0"/>
+                                                        <inset key="imageEdgeInsets" minX="40" minY="10" maxX="40" maxY="35"/>
+                                                        <state key="normal" title="Watchlist" image="ic_watchlist">
+                                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWh-xF-R6E">
                                                         <rect key="frame" x="128.5" y="0.0" width="118" height="75"/>

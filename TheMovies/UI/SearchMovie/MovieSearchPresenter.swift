@@ -38,7 +38,7 @@ class MovieSearchPresenter: MovieSearchPresenterProtocol {
     
     func searchMovie(searchText: String) {
         moviesResult.removeAll()
-        moviesResult.append(contentsOf: movies.filter { $0.title.contains(searchText) })
+        moviesResult.append(contentsOf: movies.filter { $0.title.lowercased().contains(searchText.lowercased()) })
         view?.showSearchResult(movies: moviesResult)
         if moviesResult.count == 0 {
             view?.showErrorView(type: .Custom(title: nil, desc: "No matching results found", image: Image.icEmptyState.image, btnAction: nil))

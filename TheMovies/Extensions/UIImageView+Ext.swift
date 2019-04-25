@@ -11,9 +11,10 @@ import UIKit
 extension UIImageView {
     
     func load(url: String, indexPath: IndexPath) {
+        self.tag = indexPath.row
         ImageDownloadManager.shared.download(url: url, indexPath: indexPath, size: self.frame.size) { (image, url, indexPathh, error) in
-            if let _image = image, let _indexPath = indexPathh, _indexPath == indexPath {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                if let _image = image, let _indexPath = indexPathh, self.tag == _indexPath.row {
                     self.image = _image
                 }
             }

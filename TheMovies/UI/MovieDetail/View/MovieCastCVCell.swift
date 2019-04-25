@@ -34,6 +34,7 @@ class MovieCastCVCell: UICollectionViewCell {
     }
     
     func roundImage() {
+        self.layoutIfNeeded()
         ivCastImage.layer.cornerRadius = ivCastImage.bounds.size.width/2
     }
     
