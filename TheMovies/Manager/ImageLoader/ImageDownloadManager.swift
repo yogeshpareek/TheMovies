@@ -55,7 +55,7 @@ class ImageDownloadManager {
                 }) {
                 imgOperation.queuePriority = .high
             } else {
-                addToFileLoadOperation(url: url, indexPath: indexPath, size: size, completion: completion)
+                addToOperation(url: url, indexPath: indexPath, size: size, completion: completion)
             }
             
         }
@@ -79,7 +79,7 @@ class ImageDownloadManager {
     }
     
     private func addToOperation(url: String, indexPath: IndexPath?, size: CGSize, completion: @escaping ImageDownloadHandler) {
-        let imageOperation = ImageDownloadOperation(url: url, size: size, indexPath: indexPath)
+        let imageOperation = ImageDownloadOperation(url: url, size: size, indexPath: indexPath, cacheDir: cacheDir, fileManager: fileManager)
         imageOperation.queuePriority = .veryHigh
         imageOperation.downloadCompletionHandler = { [unowned self] (image, url, indexPath, error) in
             if let _image = image,

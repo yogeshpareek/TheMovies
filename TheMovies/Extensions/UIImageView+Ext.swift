@@ -8,14 +8,30 @@
 
 import UIKit
 
+private var imageURLKey: Void?
+
 extension UIImageView {
     
+    private var imageURL: String? {
+        get {
+            return objc_getAssociatedObject(self, &imageURLKey) as? String
+        }
+        set {
+            objc_setAssociatedObject(self, &imageURLKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            
+        }
+    }
+    
     func load(url: String, indexPath: IndexPath) {
-        self.tag = indexPath.row
-        ImageDownloadManager.shared.download(url: url, indexPath: indexPath, size: self.frame.size) { (image, url, indexPathh, error) in
+        if let previousURL = imageURL {
+            ImageDownloadManager.shared.changeDownloadPriorityToSlow(of: previousURL)
+        }
+        imageURL = url
+        ImageDownloadManager.shared.download(url: url, indexPath: indexPath, size: self.frame.size) { [weak self](image, url, indexPathh, error) in
             DispatchQueue.main.async {
-                if let _image = image, let _indexPath = indexPathh, self.tag == _indexPath.row {
-                    self.image = _image
+                if let strongSelf = self, let _image = image, let _path = strongSelf.imageURL, _path == url {
+                    strongSelf.imageURL = nil
+                    strongSelf.image = _image
                 }
             }
         }

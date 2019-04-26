@@ -158,14 +158,14 @@ extension PopularMoviesVC: PopularMoviesVCProtocol {
             showLoadingView(msg: message)
         } else {
             showCVLoadingFooter = true
-            moviesCV.reloadSections(IndexSet(integer: 0))
+           // moviesCV.reloadSections(IndexSet(integer: 0))
         }
     }
     
     func hideLoading() {
         if showCVLoadingFooter {
             showCVLoadingFooter = false
-            moviesCV.reloadSections(IndexSet(integer: 0))
+           // moviesCV.reloadSections(IndexSet(integer: 0))
         } else {
             hideLoadingView()
         }

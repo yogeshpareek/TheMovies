@@ -10,7 +10,7 @@ import UIKit
 
 class ImageDownloadOperation: Operation {
     
-    private let request: ImageRequest
+    private var request: ImageRequest?
     private var downloadTask: URLSessionTask?
     
     public var downloadCompletionHandler: ImageDownloadManager.ImageDownloadHandler?
@@ -19,11 +19,15 @@ class ImageDownloadOperation: Operation {
     private let size: CGSize
     private let indexPath: IndexPath?
     
-    init(url: String, size: CGSize, indexPath: IndexPath?) {
+    private let cacheDir: URL
+    private let fileManager: FileManager
+    
+    init(url: String, size: CGSize, indexPath: IndexPath?, cacheDir: URL, fileManager: FileManager) {
         self.imagePath = url
         self.size = size
         self.indexPath = indexPath
-        request = ImageRequest()
+        self.cacheDir = cacheDir
+        self.fileManager = fileManager
     }
     
     override func main() {
@@ -32,11 +36,11 @@ class ImageDownloadOperation: Operation {
             return
         }
         executing(true)
-        download()
+        load()
     }
     
     override func cancel() {
-        request.cancel()
+        request?.cancel()
     }
     
     override var isExecuting: Bool {
@@ -74,7 +78,8 @@ class ImageDownloadOperation: Operation {
     }
     
     private func download() {
-        request.download(url: imagePath) { [weak self] (location, image, error) in
+        request = ImageRequest()
+        request?.download(url: imagePath) { [weak self] (location, image, error) in
             self?.completed(image: image, error: error)
             self?.finish(true)
             self?.executing(false)
@@ -85,4 +90,52 @@ class ImageDownloadOperation: Operation {
         self.downloadCompletionHandler?(image, imagePath, indexPath, error as? APIError)
     }
     
+    private func fileLoadcompleted(image: UIImage?) {
+        if !isCancelled {
+            downloadCompletionHandler?(image, imagePath, indexPath, nil)
+            finish(true)
+            executing(false)
+        }
+    }
+    
+    private func load() {
+        let fileName = imagePath.components(separatedBy: "/").last!
+        let originalFile = cacheDir.appendingPathComponent("\(fileName)")
+        let scaleFile = cacheDir.appendingPathComponent("\(fileName)\(size.width)x\(size.height)")
+        
+        if fileManager.fileExists(atPath: scaleFile.relativePath),
+            let data = try? Data(contentsOf: scaleFile),
+            let image = UIImage(data: data),
+            let scaledImage = image.resizedImageWith(image: image, targetSize: size)  {
+            
+            fileLoadcompleted(image: scaledImage)
+            
+        } else if fileManager.fileExists(atPath: originalFile.relativePath),
+            let data = try? Data(contentsOf: originalFile),
+            let image = UIImage(data: data),
+            let scaleImage = image.resizedImageWith(image: image, targetSize: size)  {
+            
+            saveImageToDisk(originalImage: nil, scaledImage: scaleImage)
+            fileLoadcompleted(image: image)
+            
+        } else {
+            download()
+        }
+    }
+    
+  
+    
+    private func saveImageToDisk(originalImage: UIImage?, scaledImage: UIImage?) {
+        let fileName = imagePath.components(separatedBy: "/").last!
+        let originalFile = self.cacheDir.appendingPathComponent("\(fileName)")
+        let scaleFile = self.cacheDir.appendingPathComponent("\(fileName)\(size.width)x\(size.height)")
+        
+        if let _origImage = originalImage, !self.fileManager.fileExists(atPath: originalFile.relativePath) {
+            try? _origImage.jpegData(compressionQuality: 1)?.write(to: originalFile)
+        }
+        
+        if let _scaleImage = scaledImage, !self.fileManager.fileExists(atPath: scaleFile.relativePath) {
+            try? _scaleImage.jpegData(compressionQuality: 1)?.write(to: scaleFile)
+        }
+    }
 }
